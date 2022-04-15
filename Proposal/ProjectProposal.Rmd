@@ -1,0 +1,38 @@
+---
+title: "Project Proposal"
+author: "Group Charlie"
+date: '2022-04-15'
+output: html_document
+---
+# Proposal: How does a taxi fare change based upon the time of day?
+
+### GitHub Repo: https://github.com/celinao/yellowTaxi  
+
+### Variables: 
+This dataset records information about trips made by Yellow Taxis in New York from 2009-2012. The dataset contains 40 files each containing data from a specific year and month. There are 18 columns that vary from the Taxi’s vendor name to trips’ starting latitude and longitude. However, we are going to focus on two variables: *Trip_Pickup_DateTime* and *Fare_Amt*. 
+
+*Trip_Pickup_DateTime*: String in the format “%Y-%m-%d %h:%m:%s” indicating when the passenger(s) were picked up.  
+
+*Fare_Amt*: num in representing the fare paid for the trip 
+
+### Statistical Methods: 
+
+**Overall Mean**: 
+We will use CHTC to filter our data to only contain each trip's pickup hour and the fare amount paid. We will then take this smaller file and calculate the average fare for each hour using tapply. 
+
+**Monthly Mean**: 
+Additionally, for each file we will calculate the average fare for each hour using tapply. These values will be saved to one file that we can then use to create visualizations. 
+
+### Computational Steps: 
+**Parallel Processing**:  
+We will utilize CHTC to process each of our 40 files. This process involves unzipping each file and saving Trip_Pickup_DateTime and Fare_Amt to a new, smaller file. During this process we will also be using awk to edit the Trip_Pickup_DateTime to only include the hour of day. 
+
+We will also use parallel processing to find the mean of each file which can be saved to a new file containing the year and month (as specified in by the file name) and the average fare for each hour of the day. 
+
+After we have individually processed each file we will use tapply to find the average fare for each hour of the day based upon all of the data from every year and month. 
+
+**Graphs** 
+We will then plot the average price for each hour of day as a scatter plot. We will represent the hour of day on the X-axis, Average taxi fare on the Y-axis, and month by color. That way we will be able to illustrate three dimensions of the data in one graph. 
+
+
+  
