@@ -1,5 +1,26 @@
 # yellowTaxi
 
+- Downloading the Data/Pre-format data (Sam) 
+- Sub file to call each file 
+- Shell file to 
+  - Install R 
+  - Install Packages 
+  - Call R 
+- R file 
+  - Create multiple linear regression (Hour of Day, Starting Lat, Starting Lon -> FareAmt) 
+  - Create file for regression coefficients 
+  - Create a file for (Location, Time, # of Pickups) 
+- Post-Processing Shell File
+  - Combine Regression coefficients into 1 model 
+  - Combine location files 
+  - Call post-R 
+- R file (Celina) 
+  - Graph Regression 
+  - Graph Locations 
+  - Shiny App 
+
+
+
 # Proposal Comments 
 
 **John's Comments**
