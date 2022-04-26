@@ -9,7 +9,7 @@
 - R file 
   - Create multiple linear regression (Hour of Day, Starting Lat, Starting Lon -> FareAmt) 
   - Create file for regression coefficients 
-  - Create a file for (Location, Time, # of Pickups) 
+  - Create a file for (PULocationID, Time, # of Pickups) 
 - Post-Processing Shell File
   - Combine Regression coefficients into 1 model 
   - Combine location files 
