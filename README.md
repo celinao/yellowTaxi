@@ -33,3 +33,8 @@ We could do a regression model but, that's what everyone else is doing anyways. 
   
  We could try to create a time-series graph for week/month/year. Think gg_season(period="week"). That would add to visualizations and 
  a little in computations since we'd need to convert to a tsibble but, it still wouldn't do much computation wise. 
+
+--- 
+# Resources  
+Yellow Taxi Data: https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page 
+NY Borough Data: https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page 
