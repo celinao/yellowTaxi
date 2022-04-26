@@ -4,12 +4,12 @@
 - Sub file to call each file (Sam)
 - Shell file to (Sam)
   - Install R 
-  - Install Packages 
-  - Call R 
-- R file 
+  - Install Packages (geojsonio)
+  - Call R file
+- R file: computations.R
   - Create multiple linear regression (Hour of Day, Starting Lat, Starting Lon -> FareAmt) 
   - Create file for regression coefficients 
-  - Create a file for (PULocationID, Time, # of Pickups) 
+  - Create a file for (Boro, Time, # of Pickups) 
 - Post-Processing Shell File
   - Combine Regression coefficients into 1 model 
   - Combine location files 
