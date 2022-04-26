@@ -5,7 +5,7 @@ rm -f tmp
 touch tmp
 
 # Loop over all years
-for year in `seq 2009 2021`; do
+for year in `seq 2009 2020`; do
     # Loop over all months
     for month in `seq 101 112`; do
         newMonth=`echo $month | cut -c 2-`
@@ -14,6 +14,6 @@ for year in `seq 2009 2021`; do
     done
 done
 
-# Remove last months of 2021 that have not been added yet
-head -n -5 tmp > filenames.txt
+# Remove last months after Feb 2020 that inlcude Covid-confounded data
+head -n -10 tmp > filenames.txt
 rm -f tmp
