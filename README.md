@@ -1,8 +1,8 @@
 # yellowTaxi
 
 - Downloading the Data/Pre-format data (Sam) 
-- Sub file to call each file 
-- Shell file to 
+- Sub file to call each file (Sam)
+- Shell file to (Sam)
   - Install R 
   - Install Packages 
   - Call R 
