@@ -1,11 +1,22 @@
 rm(list=ls())
 
+# Check that the correct number of argumnets were given, and get the csv filename
+args = (commandArgs(trailingOnly=TRUE))
+if(length(args) == 1){
+  yellow_taxi_data = args[1]
+} else {
+  cat('usage: Rscript computation.R <yellow taxi csv>\n', file=stderr())
+  stop()
+}
+
 # Import Packages 
 if (require("geojsonio")) {
   print("Loaded package geojsonio.")
 } else {
   print("Failed to load package geojsonio.")  
 }
+
+# Read in csv
 
 # Create multiple linear Regression (Hour of Day, Pickup_Latitude, Pickup_Longitude -> FareAmt)
 
