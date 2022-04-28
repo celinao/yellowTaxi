@@ -9,33 +9,31 @@ if(length(args) == 1){
   stop()
 }
 
-# Import Packages 
+# Import Packages
 if (require("geojsonio")) {
   print("Loaded package geojsonio.")
 } else {
-  print("Failed to load package geojsonio.")  
+  print("Failed to load package geojsonio.")
 }
 
-# Read in csv
+# Read in csv (variable comes from args)
+taxi = read.csv(yellow_taxi_data)
+# Drop na values
+taxi = na.omit(taxi)
+# data cleanup
+#take only pickup hour, location_id, and fare_amount columns
+taxi = taxi[, c(2,8,11)]
+#rename them so it is consistent across files
+names(taxi) = c("pickup_hour", "location_id", "fare_amount")
+#convert the pickup_hour column to a datetime and then extract just the hour
+taxi[[1]] = as.POSIXct(taxi[[1]], format="%Y-%m-%d %H:%M:%S") #
+taxi[[1]] = as.numeric(format(taxi[[1]], format="%H"))
 
 # Create multiple linear Regression (Hour of Day, Pickup_Latitude, Pickup_Longitude -> FareAmt)
+fit = lm(fare_amount ~ pickup_hour * location_id, data=taxi)
+coefs = coef(fit)
 
-# Create File containing regression coefficients? 
-
-### Find Location of each pickup location 
-# Add coords and boro columns 
-taxi$coords = paste(taxi$pickup_latitude, taxi$pickup_longitude, sep=",")
-taxi$boro = "" 
-# Add location for each point 
-for (i in 1:nrow(taxi)) {
-  coords <- c(taxi$pickup_longitude[i], taxi$pickup_latitude[i])
-  point <- sp::SpatialPoints(
-    matrix(
-      coords,
-      nrow = 1
-    )
-  )
-  sp::proj4string(point) <- sp::proj4string(ny)
-  polygon_check <- sp::over(point, ny)
-  taxi$boro[i] <- as.character(polygon_check$BoroName)
-}
+# Write to file with the format slope,b1,b2,b1*b2
+filename = strsplit(s, "_")[[1]][3] #this will be in the form year-month.csv
+filename = paste0("coef_", filename) #name the file coef_year-month.csv
+write(unname(coefs), file=filename, sep=",")
