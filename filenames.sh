@@ -4,8 +4,8 @@
 rm -f tmp
 touch tmp
 
-# Loop over all years
-for year in `seq 2009 2020`; do
+# Loop over all years from 2017
+for year in `seq 2017 2020`; do
     # Loop over all months
     for month in `seq 101 112`; do
         newMonth=`echo $month | cut -c 2-`
