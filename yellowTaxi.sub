@@ -9,7 +9,7 @@ arguments = $(filename)
 
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
-#transfer_input_files = computation.R, packages.tar.gz
+transfer_input_files = http://proxy.chtc.wisc.edu/SQUID/chtc/R402.tar.gz, computation.R
 # Make sure to include R files
 
 request_cpus = 1
