@@ -7,7 +7,7 @@ wget https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_$1.csv
 
 # Untar the R installation and packages
 tar -xzf R402.tar.gz
-tar -xzf packages.tar.gz
+#tar -xzf packages.tar.gz
 
 # Make sure the script will use your R installation, 
 # and the working directory as its home location

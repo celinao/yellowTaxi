@@ -8,14 +8,14 @@
 tar xzf R402.tar.gz
 export PATH=$PWD/R/bin:$PATH
 export RHOME=$PWD/R
-mkdir packages
-export R_LIBS=$PWD/packages
+#mkdir packages
+#export R_LIBS=$PWD/packages
 
 # We can add more packages here if needed
-packages="c('geojsonio')"
+#packages="c('geojsonio')"
 
-repository="'http://mirror.las.iastate.edu/CRAN'" # cannot use "https" mirror
-Rscript -e "install.packages(pkgs=$packages, repos=$repository)"
-tar czf packages.tar.gz packages
+#repository="'http://mirror.las.iastate.edu/CRAN'" # cannot use "https" mirror
+#Rscript -e "install.packages(pkgs=$packages, repos=$repository)"
+#tar czf packages.tar.gz packages
 
 exit 0
