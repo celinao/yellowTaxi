@@ -27,7 +27,7 @@ fit = lm(fare_amount ~ pickup_hour * location_id, data=taxi)
 coefs = coef(fit)
 
 # Write to file with the format slope,b1,b2,b1*b2 (interaction)
-filename = strsplit(s, "_")[[1]][3] #this will be in the form year-month.csv
+filename = strsplit(yellow_taxi_data, "_")[[1]][3] #this will be in the form year-month.csv
 filename1 = paste0("coef_", filename) #name the file coef_year-month.csv
 filename2 = paste0("counts_", filename) #name the file for sums for plotting
 write(unname(coefs), file=filename1, sep=",")
