@@ -9,13 +9,6 @@ if(length(args) == 1){
   stop()
 }
 
-# Import Packages
-if (require("geojsonio")) {
-  print("Loaded package geojsonio.")
-} else {
-  print("Failed to load package geojsonio.")
-}
-
 # Read in csv (variable comes from args)
 taxi = read.csv(yellow_taxi_data)
 # Drop na values
