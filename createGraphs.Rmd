@@ -1,0 +1,110 @@
+---
+title: "postProcessing"
+author: "Celina"
+date: '2022-04-28'
+output: html_document
+---
+Note: I've been testing this on my local computer and haven't switched it over to a .R file yet or figured out how to load the packages. 
+
+```{r}
+rm(list=ls())
+
+# Load Libraries 
+library('tidyverse')
+library('sf')
+library('shiny')
+
+# Load in data 
+small_taxi <- read_csv("total_counts.csv", col_types = cols("d", "d", "d", "d")) %>%
+  rename(LocationID = location_id) %>%
+  drop_na()
+
+taxi_monthNames <- small_taxi %>%
+  mutate(month = month.name[month])
+
+ny <- st_read("taxi_zones/taxi_zones.shp") %>%
+  left_join(taxi_monthNames, by = "LocationID")
+
+month_list = unique(ny$month)
+```
+
+
+```{r}
+# Graph of passengers in each zone over time. 
+# Shows a decreasing passenger count. (Does price increase to compensate? or due to inflation?)
+small_taxi %>%
+  mutate(LocationID = factor(LocationID)) %>%
+  ggplot(aes(x = month, y = passengers, color = LocationID)) + 
+  geom_line() + 
+  facet_grid(~year)+
+  scale_x_continuous(expand = c(0, 0))+
+  scale_y_continuous(expand = c(0, 0))+
+  theme(legend.position = "none", 
+        panel.spacing.x = unit(1, "mm"))
+```
+
+
+
+```{r}
+# Function to create map 
+createMap <- function(selected){
+  p <- ny %>%
+    filter(month == selected) %>%
+    ggplot() + 
+    geom_sf(aes(fill = log(passengers)), color = "transparent") + 
+    ggtitle(paste("Taxi Passengers per zone:",  selected)) + 
+    theme_void() +
+    theme(plot.title = element_text(hjust = 0.5),
+          legend.position = "bottom") + 
+    scale_fill_gradientn(colors = c("white", "yellow", "orange", "dark red"), na.value = "light grey", name = "Passenger Count\n(log scale)") +
+    facet_grid(~year)
+  return(p)
+}
+# createMap(month.name[1])
+```
+
+
+```{r}
+# Shiny App 
+ui = fluidPage(
+  
+  navbarPage("NY Yellow Taxi",
+             sidebarLayout(
+               
+               # Sidebar
+               sidebarPanel(
+                 # Select a month
+                 selectInput(
+                   inputId = "month", 
+                   label = h3("Month: "), 
+                   choices = month_list, 
+                   selected = min(month_list)
+                 )
+                 ), 
+               
+               # Main Panel: 
+               mainPanel(
+                 plotOutput("map"), width = "100%"
+                 )
+               )
+             )
+  )
+
+server = function(input, output) {
+  output$map <- renderPlot({
+    createMap(input$month)
+  }, height = 600)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+
+
+
+
+
+
+
+
+
